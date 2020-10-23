@@ -5,12 +5,12 @@ import './App.css';
    constructor() {
      super();
      this.state = {
-       restaurantData = []
+       restaurantData: []
      }
    }
 
    componentDidMount() {
-     
+
    }
 
   render() {
