@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Nav from "../Nav/Nav";
+import SearchContainer from '../SearchContainer/SearchContainer'
 
 class App extends Component {
   constructor() {
@@ -32,6 +33,7 @@ class App extends Component {
     return (
       <main>
         <Nav logoResetTable={this.logoResetTable} allRestaurantData={this.allRestaurantData} />
+        <SearchContainer />
       </main>
     );
   }
