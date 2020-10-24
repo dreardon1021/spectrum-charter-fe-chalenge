@@ -3,10 +3,10 @@ import "./SearchContainer.css";
 
 import SearchForm from "../SearchForm/SearchForm";
 
-const SearchContainer = () => {
+const SearchContainer = ({ updateCurrentSearchData }) => {
   return (
     <section className="search-container">
-      <SearchForm />
+      <SearchForm updateCurrentSearchData={updateCurrentSearchData} />
     </section>
   );
 };

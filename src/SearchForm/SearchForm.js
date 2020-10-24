@@ -2,15 +2,21 @@ import React, { Component } from "react";
 import "./SearchForm.css";
 
 class SearchForm extends Component {
-  constructor() {
-    super();
+  constructor({ updateCurrentSearchData }) {
+    super({ updateCurrentSearchData });
     this.state = {
       searchValue: ""
     };
   }
 
   updateSearchState(e) {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  submitSearchForm(e) {
+    e.preventDefault();
+    let searchQuery = this.state.searchValue;
+    this.props.updateCurrentSearchData(searchQuery)
   }
 
   render() {
@@ -22,7 +28,11 @@ class SearchForm extends Component {
           placeholder="Search by name, city, or genre"
           onChange={e => this.updateSearchState(e)}
         />
-        <button className="search-btn search-filter-btn" type="submit">
+        <button
+          onClick={e => this.submitSearchForm(e)}
+          className="search-btn search-filter-btn"
+          type="submit"
+        >
           Search
         </button>
       </form>

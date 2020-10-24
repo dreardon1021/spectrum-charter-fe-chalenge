@@ -8,9 +8,12 @@ class App extends Component {
   constructor() {
     super();
     this.logoResetTable = this.logoResetTable.bind(this);
+    this.updateCurrentSearchData = this.updateCurrentSearchData.bind(this)
     this.state = {
       allRestaurantData: [],
-      currentSearchData: []
+      currentSearchData: [],
+      filterByStyleOn: false,
+      filterByGenreOn: false,
     };
   }
 
@@ -18,8 +21,14 @@ class App extends Component {
     this.setState({ currentSearchData: allData });
   }
 
-  updateCurrentSearchData(newSearchData) {
-    this.setState({ currentSearchData: newSearchData });
+  updateCurrentSearchData(newSearchQuery) {
+    let newCurrentSearchData = [];
+    this.state.currentSearchData.forEach(resturant => {
+      if (resturant.name.includes(newSearchQuery) || resturant.city.includes(newSearchQuery) || resturant.genre.includes(newSearchQuery)) {
+        newCurrentSearchData.push(resturant)
+      }
+    })
+    this.setState({currentSearchData: newCurrentSearchData})
   }
 
   componentDidMount() {
