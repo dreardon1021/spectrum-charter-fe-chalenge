@@ -12,8 +12,8 @@ class App extends Component {
     this.state = {
       allRestaurantData: [],
       currentSearchData: [],
-      filterByStateOn: false,
-      filterByGenreOn: false,
+      filterByState: null,
+      filterByGenre: null,
       possibleRestaurantStates: [],
       possibleRestaurantGenres: []
     };
@@ -64,6 +64,8 @@ class App extends Component {
   logoResetTable(allData) {
     this.setState({ currentSearchData: allData });
   }
+
+  
 
   updateCurrentSearchData(newSearchQuery) {
     let newCurrentSearchData = [];

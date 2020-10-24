@@ -6,37 +6,45 @@ class FilterButtonContainer extends Component {
   constructor({ possibleRestaurantStates, possibleRestaurantGenres }) {
     super({ possibleRestaurantStates, possibleRestaurantGenres });
     this.state = {
-      currentGenreFilter: null,
-      currentStateFilter: null
+      currentGenreFilter: '',
+      currentStateFilter: ''
     };
+  }
+
+  updateFiltersOnChange(e) {
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  submitFilterForm(e) {
+    e.preventDefault()
   }
 
   render() {
     return (
       <form className="filter-form">
-        <div>
+        <div className="genre-state-select-container">
           <label for="select-genre" className="filter-headers">
             Select Genre:
           </label>
-          <select className="filter-select" name="select-genre">
-            <option>Please Select a Genre</option>
+          <select onChange={e => this.updateFiltersOnChange(e)} className="filter-select" name="currentGenreFilter">
+            <option value="">Please Select a Genre</option>
             {this.props.possibleRestaurantGenres.map(genre => {
-              return <option>{genre}</option>;
+              return <option value={genre}>{genre}</option>;
             })}
           </select>
         </div>
-        <div>
-          <label for="select-genre" className="filter-headers">
+        <div className="genre-state-select-container">
+          <label for="select-state" className="filter-headers">
             Select State:
           </label>
-          <select className="filter-select" name="select-genre">
-            <option>Please Select a State</option>
+          <select onChange={e => this.updateFiltersOnChange(e)} className="filter-select" name="currentStateFilter">
+            <option value="null">Please Select a State</option>
             {this.props.possibleRestaurantStates.map(state => {
-              return <option>{state}</option>;
+              return <option value={state}>{state}</option>;
             })}
           </select>
         </div>
-        <button className="search-filter-btn cursor-pointer" type="submit">Filter</button>
+        <button onClick={e => this.submitFilterForm(e)} className="search-filter-btn cursor-pointer" type="submit">Filter</button>
       </form>
     );
   }

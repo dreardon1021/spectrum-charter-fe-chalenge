@@ -1,5 +1,6 @@
 import React from "react";
 import "./SearchContainer.css";
+import "../App/App.css"
 
 import SearchForm from "../SearchForm/SearchForm";
 import FilterButtonContainer from "../FilterButtonContainer/FilterButtonContainer";
@@ -12,6 +13,7 @@ const SearchContainer = ({ updateCurrentSearchData, possibleRestaurantGenres, po
         possibleRestaurantStates={possibleRestaurantStates}
         possibleRestaurantGenres={possibleRestaurantGenres}
       />
+      <button className="reset-btn cursor-pointer search-filter-btn">Reset</button>
     </section>
   );
 };
