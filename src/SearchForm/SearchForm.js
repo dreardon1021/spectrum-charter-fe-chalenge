@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./SearchForm.css";
+import "../App/App.css"
 
 class SearchForm extends Component {
   constructor({ updateCurrentSearchData }) {
@@ -32,7 +33,7 @@ class SearchForm extends Component {
         />
         <button
           onClick={e => this.submitSearchForm(e)}
-          className="search-btn search-filter-btn"
+          className="cursor-pointer search-filter-btn"
           type="submit"
         >
           Search
