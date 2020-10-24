@@ -1,22 +1,33 @@
-import React, { Component } from 'react'
-import './SearchForm.css'
+import React, { Component } from "react";
+import "./SearchForm.css";
 
 class SearchForm extends Component {
   constructor() {
     super();
     this.state = {
-      searchValue: '',
-    }
+      searchValue: ""
+    };
+  }
+
+  updateSearchState(e) {
+    this.setState({[e.target.name]: e.target.value})
   }
 
   render() {
-    return(
+    return (
       <form className="search-form">
-        <input className="search-input" placeholder="Search by name, city, or genre" />
-        <button classname="search-btn search-filter-btn" type="submit">Search</button>
+        <input
+          className="search-input"
+          name="searchValue"
+          placeholder="Search by name, city, or genre"
+          onChange={e => this.updateSearchState(e)}
+        />
+        <button className="search-btn search-filter-btn" type="submit">
+          Search
+        </button>
       </form>
-    )
+    );
   }
 }
 
-export default SearchForm
+export default SearchForm;
