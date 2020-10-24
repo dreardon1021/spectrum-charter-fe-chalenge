@@ -8,27 +8,13 @@ class App extends Component {
   constructor() {
     super();
     this.logoResetTable = this.logoResetTable.bind(this);
-    this.updateCurrentSearchData = this.updateCurrentSearchData.bind(this)
+    this.updateCurrentSearchData = this.updateCurrentSearchData.bind(this);
     this.state = {
       allRestaurantData: [],
       currentSearchData: [],
       filterByStyleOn: false,
-      filterByGenreOn: false,
+      filterByGenreOn: false
     };
-  }
-
-  logoResetTable(allData) {
-    this.setState({ currentSearchData: allData });
-  }
-
-  updateCurrentSearchData(newSearchQuery) {
-    let newCurrentSearchData = [];
-    this.state.currentSearchData.forEach(resturant => {
-      if (resturant.name.includes(newSearchQuery) || resturant.city.includes(newSearchQuery) || resturant.genre.includes(newSearchQuery)) {
-        newCurrentSearchData.push(resturant)
-      }
-    })
-    this.setState({currentSearchData: newCurrentSearchData})
   }
 
   componentDidMount() {
@@ -42,6 +28,24 @@ class App extends Component {
       .then(data =>
         this.setState({ allRestaurantData: data, currentSearchData: data })
       );
+  }
+
+  logoResetTable(allData) {
+    this.setState({ currentSearchData: allData });
+  }
+
+  updateCurrentSearchData(newSearchQuery) {
+    let newCurrentSearchData = [];
+    this.state.currentSearchData.forEach(resturant => {
+      if (
+        resturant.name.match(newSearchQuery) ||
+        resturant.city.match(newSearchQuery) ||
+        resturant.genre.match(newSearchQuery)
+      ) {
+        newCurrentSearchData.push(resturant);
+      }
+    });
+    this.setState({ currentSearchData: newCurrentSearchData });
   }
 
   render() {
