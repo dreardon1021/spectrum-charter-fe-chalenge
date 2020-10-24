@@ -12,9 +12,34 @@ class App extends Component {
     this.state = {
       allRestaurantData: [],
       currentSearchData: [],
-      filterByStyleOn: false,
-      filterByGenreOn: false
+      filterByStateOn: false,
+      filterByGenreOn: false,
+      possibleRestaurantStates: [],
+      possibleRestaurantGenres: []
     };
+  }
+
+  findPossibleRestaurantStates(data) {
+    let possibleStates = []
+    data.forEach(restaurant => {
+      if(!possibleStates.includes(restaurant.state)) {
+        possibleStates.push(restaurant.state)
+      }
+    })
+    return possibleStates
+  }
+
+  findPossibleRestaurantGenres(data) {
+    let possibleGenres = []
+    data.forEach(restaurant => {
+      let restaurantGenreArray = restaurant.genre.split(',')
+      restaurantGenreArray.forEach(genre => {
+        if(!possibleGenres.includes(genre)) {
+          possibleGenres.push(genre)
+        }
+      })
+    })
+    return possibleGenres
   }
 
   componentDidMount() {
@@ -26,7 +51,13 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(data =>
-        this.setState({ allRestaurantData: data, currentSearchData: data })
+        this.setState(
+          { allRestaurantData: data,
+            currentSearchData: data,
+            possibleRestaurantStates: this.findPossibleRestaurantStates(data),
+            possibleRestaurantGenres: this.findPossibleRestaurantGenres(data)
+          }
+        )
       );
   }
 
@@ -57,6 +88,8 @@ class App extends Component {
         />
         <SearchContainer
           updateCurrentSearchData={this.updateCurrentSearchData}
+          possibleRestaurantStates={this.state.possibleRestaurantStates}
+          possibleRestaurantGenres={this.state.possibleRestaurantGenres}
         />
       </main>
     );
