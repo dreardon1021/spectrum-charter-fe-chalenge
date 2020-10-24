@@ -38,9 +38,9 @@ class App extends Component {
     let newCurrentSearchData = [];
     this.state.currentSearchData.forEach(resturant => {
       if (
-        resturant.name.match(newSearchQuery) ||
-        resturant.city.match(newSearchQuery) ||
-        resturant.genre.match(newSearchQuery)
+        resturant.name.toLowerCase().match(newSearchQuery.toLowerCase()) ||
+        resturant.city.toLowerCase().match(newSearchQuery.toLowerCase()) ||
+        resturant.genre.toLowerCase().match(newSearchQuery.toLowerCase())
       ) {
         newCurrentSearchData.push(resturant);
       }
