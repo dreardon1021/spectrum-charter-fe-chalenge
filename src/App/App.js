@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Nav from "../Nav/Nav";
-import SearchContainer from '../SearchContainer/SearchContainer'
+import SearchContainer from "../SearchContainer/SearchContainer";
 
 class App extends Component {
   constructor() {
     super();
-    this.logoResetTable = this.logoResetTable.bind(this)
+    this.logoResetTable = this.logoResetTable.bind(this);
     this.state = {
       allRestaurantData: [],
       currentSearchData: []
@@ -18,6 +18,10 @@ class App extends Component {
     this.setState({ currentSearchData: allData });
   }
 
+  updateCurrentSearchData(newSearchData) {
+    this.setState({ currentSearchData: newSearchData });
+  }
+
   componentDidMount() {
     fetch("https://code-challenge.spectrumtoolbox.com/api/restaurants", {
       method: "GET",
@@ -26,14 +30,21 @@ class App extends Component {
       }
     })
       .then(response => response.json())
-      .then(data => this.setState({ allRestaurantData: data, currentSearchData: data }));
+      .then(data =>
+        this.setState({ allRestaurantData: data, currentSearchData: data })
+      );
   }
 
   render() {
     return (
       <main>
-        <Nav logoResetTable={this.logoResetTable} allRestaurantData={this.allRestaurantData} />
-        <SearchContainer />
+        <Nav
+          logoResetTable={this.logoResetTable}
+          allRestaurantData={this.allRestaurantData}
+        />
+        <SearchContainer
+          updateCurrentSearchData={this.updateCurrentSearchData}
+        />
       </main>
     );
   }
