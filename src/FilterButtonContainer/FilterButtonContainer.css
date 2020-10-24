@@ -1,6 +1,11 @@
-.filter-button-container {
+.filter-form {
   width: 80%;
   display: flex;
   justify-content: space-between;
   margin-top: 1em;
+}
+
+.filter-select {
+  width: 20%;
+  height: 3em;
 }
