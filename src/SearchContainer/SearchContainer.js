@@ -1,25 +1,14 @@
-import React, { Component } from 'react';
-import './SearchContainer.css';
+import React from "react";
+import "./SearchContainer.css";
 
-import SearchForm from '../SearchForm/SearchForm'
+import SearchForm from "../SearchForm/SearchForm";
 
+const SearchContainer = () => {
+  return (
+    <section className="search-container">
+      <SearchForm />
+    </section>
+  );
+};
 
-
-class SearchContainer extends Component {
-  constructor() {
-    super();
-    this.state = {
-
-    }
-  }
-
-  render() {
-    return(
-      <section className="search-container">
-        <SearchForm />
-      </section>
-    )
-  }
-}
-
-export default SearchContainer
+export default SearchContainer;
