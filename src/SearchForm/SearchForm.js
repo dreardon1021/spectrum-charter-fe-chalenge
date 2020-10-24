@@ -3,22 +3,29 @@ import "./SearchForm.css";
 import "../App/App.css"
 
 class SearchForm extends Component {
-  constructor({ updateCurrentSearchData }) {
-    super({ updateCurrentSearchData });
+  constructor({ updateCurrentSearchData, formResetTable, allRestaurantData }) {
+    super({ updateCurrentSearchData, formResetTable, allRestaurantData });
     this.state = {
       searchValue: ""
     };
   }
 
   updateSearchState(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value }, () => {
+      this.resetOnInputDelete(e)
+    });
+  }
+
+  resetOnInputDelete(e) {
+    if (e.target.value === '') {
+      this.props.formResetTable(this.props.allRestaurantData)
+    }
   }
 
   submitSearchForm(e) {
     e.preventDefault();
     let searchQuery = this.state.searchValue;
     this.props.updateCurrentSearchData(searchQuery)
-    this.setState({searchValue: ''})
   }
 
   render() {
