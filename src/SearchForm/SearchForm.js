@@ -17,6 +17,7 @@ class SearchForm extends Component {
     e.preventDefault();
     let searchQuery = this.state.searchValue;
     this.props.updateCurrentSearchData(searchQuery)
+    this.setState({searchValue: ''})
   }
 
   render() {
@@ -25,6 +26,7 @@ class SearchForm extends Component {
         <input
           className="search-input"
           name="searchValue"
+          value={this.state.searchValue}
           placeholder="Search by name, city, or genre"
           onChange={e => this.updateSearchState(e)}
         />
