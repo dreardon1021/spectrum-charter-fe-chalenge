@@ -3,9 +3,7 @@ import "./App.css";
 
 import Nav from "../Nav/Nav";
 import SearchContainer from "../SearchContainer/SearchContainer";
-import { isArgumentPlaceholder } from "@babel/types";
-import { all } from "q";
-import { current } from "immer";
+import RestaurantTable from "../RestaurantTable/RestaurantTable"
 
 class App extends Component {
   constructor() {
@@ -62,7 +60,7 @@ class App extends Component {
           allRestaurantData: data,
           currentSearchData: data,
           currentFilterData: data,
-          dataToDisplay: data,
+          dataToDisplay: data.sort((a,b) => a.name.localeCompare(b.name)),
           possibleRestaurantStates: this.findPossibleRestaurantStates(data),
           possibleRestaurantGenres: this.findPossibleRestaurantGenres(data)
         })
@@ -84,7 +82,7 @@ class App extends Component {
     } else {
       dataToDisplay = this.state.allRestaurantData
     }
-    this.setState({dataToDisplay: dataToDisplay})
+    this.setState({dataToDisplay: dataToDisplay.sort((a,b) => a.name.localeCompare(b.name)) })
   }
 
   filterData(genreFilter, stateFilter) {
@@ -169,6 +167,9 @@ class App extends Component {
           allRestaurantData={this.state.allRestaurantData}
           possibleRestaurantStates={this.state.possibleRestaurantStates}
           possibleRestaurantGenres={this.state.possibleRestaurantGenres}
+        />
+        <RestaurantTable
+          dataToDisplay={this.state.dataToDisplay}
         />
       </main>
     );

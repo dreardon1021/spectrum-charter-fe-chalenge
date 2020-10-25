@@ -1,0 +1,90 @@
+.table-container {
+  width: 70%;
+  height: auto;
+  min-height: 30em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  opacity: 90%;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em 0 2em 0;
+}
+
+.table-header {
+  width: fit-content;
+  margin-bottom: 1em;
+}
+
+/* table styles */
+.restaurant-table {
+  width: 90%;
+}
+
+.error-container {
+  justify-content: center;
+}
+
+.restaurant-table-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.restaurant-table-data-cell {
+  border: 0.25px solid black;
+  min-height: 2em;
+  text-align: center;
+}
+
+.name-cell {
+  min-width: 30%;
+}
+
+.city-cell {
+  min-width: 20%;
+}
+
+.state-cell {
+  min-width: 5%;
+}
+
+.telephone-cell {
+  min-width: 15%;
+}
+
+.genre-cell {
+  min-width: 30%;
+}
+
+
+/* page numbers styles */
+.page-numbers-container {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1em;
+}
+
+li {
+  width: 20%;
+  list-style-type: none;
+}
+
+.page-button {
+  width: 100%;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 0.5em;
+}
+
+.page-button:hover {
+  background-color: rgb(82, 179, 211);
+}
+
+.active {
+  background-color: rgb(23, 155, 199);
+  color: white;
+}
