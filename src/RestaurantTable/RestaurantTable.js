@@ -28,7 +28,7 @@ class RestaurantTable extends Component {
     );
 
     const renderRestaurants = currentRestaurants.map((restaurant, index) => {
-      let restaurantGenres = restaurant.genre.split(",").join(" ");
+      let restaurantGenres = restaurant.genre.split(",").join(", ");
       return (
         <tr className="restaurant-table-row" key={index}>
           <td className="restaurant-table-data-cell name-cell">
@@ -73,14 +73,21 @@ class RestaurantTable extends Component {
       );
     });
 
+
     return (
-      <section className="table-container">
+      this.props.dataToDisplay.length !== 0 ? (
+        <section className="table-container">
         <h2 className="table-header">Available Restaurants</h2>
-        <table calssName="restaurant-table">
+        <table className="restaurant-table">
           <tbody classname="restaurant-table-body">{renderRestaurants}</tbody>
         </table>
         <ul className="page-numbers-container">{renderPageNumbers}</ul>
       </section>
+      ) : (
+        <section className="table-container error-container">
+          <h2>No Restaurants Found in Search/Filter</h2>
+        </section>
+      )
     );
   }
 }

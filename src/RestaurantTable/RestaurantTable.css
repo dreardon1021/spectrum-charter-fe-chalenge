@@ -1,10 +1,11 @@
 .table-container {
   width: 70%;
   height: auto;
-  min-height: 20em;
+  min-height: 30em;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   background-color: white;
   opacity: 90%;
   border-radius: 1em;
@@ -17,8 +18,13 @@
   margin-bottom: 1em;
 }
 
+/* table styles */
 .restaurant-table {
-  width: 100%;
+  width: 90%;
+}
+
+.error-container {
+  justify-content: center;
 }
 
 .restaurant-table-row {
@@ -30,16 +36,31 @@
 .restaurant-table-data-cell {
   border: 0.25px solid black;
   min-height: 2em;
+  text-align: center;
 }
 
 .name-cell {
-  min-width: 35%;
+  min-width: 30%;
 }
 
 .city-cell {
+  min-width: 20%;
+}
+
+.state-cell {
+  min-width: 5%;
+}
+
+.telephone-cell {
   min-width: 15%;
 }
 
+.genre-cell {
+  min-width: 30%;
+}
+
+
+/* page numbers styles */
 .page-numbers-container {
   width: 50%;
   display: flex;
