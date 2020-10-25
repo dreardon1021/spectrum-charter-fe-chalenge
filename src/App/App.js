@@ -5,6 +5,7 @@ import Nav from "../Nav/Nav";
 import SearchContainer from "../SearchContainer/SearchContainer";
 import { isArgumentPlaceholder } from "@babel/types";
 import { all } from "q";
+import { current } from "immer";
 
 class App extends Component {
   constructor() {
@@ -12,14 +13,16 @@ class App extends Component {
     this.logoResetTable = this.logoResetTable.bind(this);
     this.updateCurrentSearchData = this.updateCurrentSearchData.bind(this);
     this.filterData = this.filterData.bind(this);
-    this.formResetTable = this.formResetTable.bind(this)
+    this.formResetTable = this.formResetTable.bind(this);
     this.state = {
       allRestaurantData: [],
       currentSearchData: [],
       currentFilterData: [],
+      dataToDisplay: [],
       possibleRestaurantStates: [],
       possibleRestaurantGenres: [],
-      filterOn: false
+      filterOn: false,
+      searchOn: false
     };
   }
 
@@ -59,10 +62,29 @@ class App extends Component {
           allRestaurantData: data,
           currentSearchData: data,
           currentFilterData: data,
+          dataToDisplay: data,
           possibleRestaurantStates: this.findPossibleRestaurantStates(data),
           possibleRestaurantGenres: this.findPossibleRestaurantGenres(data)
         })
       );
+  }
+
+  adjustDisplayedData() {
+    let dataToDisplay;
+    if (this.state.filterOn === false && this.state.searchOn === true) {
+      dataToDisplay = this.state.currentSearchData
+    } else if (this.state.filterOn === true && this.state.searchOn === false) {
+      dataToDisplay = this.state.currentFilterData
+    } else if (this.state.searchOn === true && this.state.filterOn === true) {
+      dataToDisplay = this.state.currentFilterData.filter(restaurant => {
+        if (this.state.currentSearchData.includes(restaurant)) {
+          return restaurant
+        }
+      })
+    } else {
+      dataToDisplay = this.state.allRestaurantData
+    }
+    this.setState({dataToDisplay: dataToDisplay})
   }
 
   filterData(genreFilter, stateFilter) {
@@ -80,24 +102,28 @@ class App extends Component {
         stateFilter === "" &&
         genreFilter !== ""
       ) {
-        return restaurant
+        return restaurant;
       } else if (
         restaurant.state === stateFilter &&
         stateFilter !== "" &&
         genreFilter === ""
       ) {
-        return restaurant
-      } else if (
-        stateFilter === "" &&
-        genreFilter === ""
-      ) {
-        return restaurant
+        return restaurant;
+      } else if (stateFilter === "" && genreFilter === "") {
+        return restaurant;
       }
     });
-    
-    this.setState({ currentFilterData: filteredData, currentSearchData: filteredData, filterOn: true });
+
+    this.setState({
+      currentFilterData: filteredData,
+      filterOn: true
+    }, () => {
+      this.adjustDisplayedData()
+    });
     if (stateFilter === "" && genreFilter === "") {
-      this.setState({filterOn: false})
+      this.setState({ filterOn: false }, () => {
+        this.adjustDisplayedData()
+      });
     }
   }
 
@@ -106,12 +132,16 @@ class App extends Component {
   }
 
   logoResetTable(allData) {
-    this.setState({ currentSearchData: allData });
+    this.setState({
+      currentSearchData: allData,
+      currentFilterData: allData,
+      dataToDisplay: allData
+    });
   }
 
   updateCurrentSearchData(newSearchQuery) {
     let newCurrentSearchData = [];
-    this.state.currentSearchData.forEach(resturant => {
+    this.state.allRestaurantData.forEach(resturant => {
       if (
         resturant.name.toLowerCase().match(newSearchQuery.toLowerCase()) ||
         resturant.city.toLowerCase().match(newSearchQuery.toLowerCase()) ||
@@ -120,7 +150,9 @@ class App extends Component {
         newCurrentSearchData.push(resturant);
       }
     });
-    this.setState({ currentSearchData: newCurrentSearchData });
+    this.setState({ currentSearchData: newCurrentSearchData, searchOn: true }, () => {
+      this.adjustDisplayedData()
+    });
   }
 
   render() {

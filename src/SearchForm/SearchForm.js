@@ -17,8 +17,10 @@ class SearchForm extends Component {
   }
 
   resetOnInputDelete(e) {
+    let searchQuery = this.state.searchValue;
     if (e.target.value === '') {
       this.props.formResetTable(this.props.allRestaurantData)
+      this.props.updateCurrentSearchData(searchQuery)
     }
   }
 
