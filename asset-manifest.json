@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/spectrum-charter-fe-challenge/static/css/main.052e1bee.chunk.css",
+    "main.css": "/spectrum-charter-fe-challenge/static/css/main.138e4eb6.chunk.css",
     "main.js": "/spectrum-charter-fe-challenge/static/js/main.2f5c742b.chunk.js",
     "main.js.map": "/spectrum-charter-fe-challenge/static/js/main.2f5c742b.chunk.js.map",
     "runtime-main.js": "/spectrum-charter-fe-challenge/static/js/runtime-main.cae01a0c.js",
@@ -10,13 +10,13 @@
     "static/js/3.e729b693.chunk.js": "/spectrum-charter-fe-challenge/static/js/3.e729b693.chunk.js",
     "static/js/3.e729b693.chunk.js.map": "/spectrum-charter-fe-challenge/static/js/3.e729b693.chunk.js.map",
     "index.html": "/spectrum-charter-fe-challenge/index.html",
-    "static/css/main.052e1bee.chunk.css.map": "/spectrum-charter-fe-challenge/static/css/main.052e1bee.chunk.css.map",
+    "static/css/main.138e4eb6.chunk.css.map": "/spectrum-charter-fe-challenge/static/css/main.138e4eb6.chunk.css.map",
     "static/js/2.48c2bb63.chunk.js.LICENSE.txt": "/spectrum-charter-fe-challenge/static/js/2.48c2bb63.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.cae01a0c.js",
     "static/js/2.48c2bb63.chunk.js",
-    "static/css/main.052e1bee.chunk.css",
+    "static/css/main.138e4eb6.chunk.css",
     "static/js/main.2f5c742b.chunk.js"
   ]
 }
