@@ -1,6 +1,10 @@
+# Deployed Link
+
+https://dreardon1021.github.io/spectrum-charter-fe-challenge/
+
 # Charter/Spectrum FE Code Challenge
 
-This project was started on October 23 at 5:00 PM MST
+This project was started on October 23 at 5:00 PM MST and ended October 26th 8:00 AM
 
 Deployed link will be available upon completion.
 
