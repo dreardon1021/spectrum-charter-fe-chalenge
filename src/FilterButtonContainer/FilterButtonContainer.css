@@ -1,0 +1,15 @@
+.filter-form {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.genre-state-select-container {
+  width: 40%;
+}
+
+.filter-select {
+  width: 80%;
+  height: 2em;
+}
