@@ -3,9 +3,7 @@ import "./App.css";
 
 import Nav from "../Nav/Nav";
 import SearchContainer from "../SearchContainer/SearchContainer";
-import { isArgumentPlaceholder } from "@babel/types";
-import { all } from "q";
-import { current } from "immer";
+import RestaurantTable from "../RestaurantTable/RestaurantTable"
 
 class App extends Component {
   constructor() {
@@ -169,6 +167,9 @@ class App extends Component {
           allRestaurantData={this.state.allRestaurantData}
           possibleRestaurantStates={this.state.possibleRestaurantStates}
           possibleRestaurantGenres={this.state.possibleRestaurantGenres}
+        />
+        <RestaurantTable
+          dataToDisplay={this.state.dataToDisplay}
         />
       </main>
     );
