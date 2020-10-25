@@ -8,7 +8,7 @@ import '../App/App.css'
 const Nav = ({ logoResetTable, allRestaurantData }) => {
   return(
     <nav>
-      <h1 onClick={allRestaurantData => logoResetTable(allRestaurantData)} className="logo cursor-pointer">Restauraunt Locator</h1>
+      <h1 onClick={() => logoResetTable(allRestaurantData)} className="logo cursor-pointer">Restauraunt Locator</h1>
     </nav>
   )
 }
