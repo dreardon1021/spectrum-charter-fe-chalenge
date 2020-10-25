@@ -71,7 +71,7 @@ class RestaurantTable extends Component {
           <button
             id={number}
             onClick={this.handleClick}
-            className="page-button cursor-pointer"
+            className={(this.state.currentPage === number ? 'active ' : '') + "page-button cursor-pointer"}
           >
             {number}
           </button>

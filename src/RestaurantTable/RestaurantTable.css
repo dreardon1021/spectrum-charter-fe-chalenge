@@ -83,3 +83,8 @@ li {
 .page-button:hover {
   background-color: rgb(82, 179, 211);
 }
+
+.active {
+  background-color: rgb(23, 155, 199);
+  color: white;
+}
