@@ -60,7 +60,7 @@ class App extends Component {
           allRestaurantData: data,
           currentSearchData: data,
           currentFilterData: data,
-          dataToDisplay: data,
+          dataToDisplay: data.sort((a,b) => a.name.localeCompare(b.name)),
           possibleRestaurantStates: this.findPossibleRestaurantStates(data),
           possibleRestaurantGenres: this.findPossibleRestaurantGenres(data)
         })
@@ -82,7 +82,7 @@ class App extends Component {
     } else {
       dataToDisplay = this.state.allRestaurantData
     }
-    this.setState({dataToDisplay: dataToDisplay})
+    this.setState({dataToDisplay: dataToDisplay.sort((a,b) => a.name.localeCompare(b.name)) })
   }
 
   filterData(genreFilter, stateFilter) {

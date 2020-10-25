@@ -17,8 +17,14 @@ class RestaurantTable extends Component {
     });
   }
 
+
   render() {
-    const { currentPage, restaurantsPerPage } = this.state;
+    let { currentPage, restaurantsPerPage } = this.state;
+
+    currentPage = this.props.dataToDisplay.length < 10 ? 1 : currentPage
+    if(this.state.currentPage !== currentPage) {
+      this.setState({currentPage: 1})
+    }
 
     const indexOfLastRestaurant = currentPage * restaurantsPerPage;
     const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantsPerPage;
@@ -73,21 +79,18 @@ class RestaurantTable extends Component {
       );
     });
 
-
-    return (
-      this.props.dataToDisplay.length !== 0 ? (
-        <section className="table-container">
+    return this.props.dataToDisplay.length !== 0 ? (
+      <section className="table-container">
         <h2 className="table-header">Available Restaurants</h2>
         <table className="restaurant-table">
           <tbody classname="restaurant-table-body">{renderRestaurants}</tbody>
         </table>
         <ul className="page-numbers-container">{renderPageNumbers}</ul>
       </section>
-      ) : (
-        <section className="table-container error-container">
-          <h2>No Restaurants Found in Search/Filter</h2>
-        </section>
-      )
+    ) : (
+      <section className="table-container error-container">
+        <h2>No Restaurants Found in Search/Filter</h2>
+      </section>
     );
   }
 }
