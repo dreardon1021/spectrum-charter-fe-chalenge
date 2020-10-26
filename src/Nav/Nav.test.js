@@ -17,7 +17,7 @@ describe("Nav", () => {
   it("should reset data when logo is clicked", () => {
     const mockLogoResetTable = jest.fn();
 
-    const { getByText, getByTestId } = render(
+    const { getByText } = render(
       <Nav
         logoResetTable={mockLogoResetTable}
         allRestaurantData={[
