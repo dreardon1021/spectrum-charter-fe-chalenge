@@ -3,7 +3,7 @@ import "./App.css";
 
 import Nav from "../Nav/Nav";
 import SearchContainer from "../SearchContainer/SearchContainer";
-import RestaurantTable from "../RestaurantTable/RestaurantTable"
+import RestaurantTable from "../RestaurantTable/RestaurantTable";
 
 class App extends Component {
   constructor() {
@@ -19,6 +19,7 @@ class App extends Component {
       dataToDisplay: [],
       possibleRestaurantStates: [],
       possibleRestaurantGenres: [],
+      possibleRestaurantAttire: [],
       filterOn: false,
       searchOn: false
     };
@@ -32,6 +33,18 @@ class App extends Component {
       }
     });
     return possibleStates;
+  }
+
+  findPossibleRestaurantAttire(data) {
+    let possibleAttire = [];
+    data.forEach(restaurant => {
+      let attireStr =
+        restaurant.attire.charAt(0).toUpperCase() + restaurant.attire.slice(1);
+      if (!possibleAttire.includes(attireStr)) {
+        possibleAttire.push(attireStr);
+      }
+    });
+    return possibleAttire;
   }
 
   findPossibleRestaurantGenres(data) {
@@ -60,9 +73,10 @@ class App extends Component {
           allRestaurantData: data,
           currentSearchData: data,
           currentFilterData: data,
-          dataToDisplay: data.sort((a,b) => a.name.localeCompare(b.name)),
+          dataToDisplay: data.sort((a, b) => a.name.localeCompare(b.name)),
           possibleRestaurantStates: this.findPossibleRestaurantStates(data),
-          possibleRestaurantGenres: this.findPossibleRestaurantGenres(data)
+          possibleRestaurantGenres: this.findPossibleRestaurantGenres(data),
+          possibleRestaurantAttire: this.findPossibleRestaurantAttire(data)
         })
       );
   }
@@ -70,57 +84,108 @@ class App extends Component {
   adjustDisplayedData() {
     let dataToDisplay;
     if (this.state.filterOn === false && this.state.searchOn === true) {
-      dataToDisplay = this.state.currentSearchData
+      dataToDisplay = this.state.currentSearchData;
     } else if (this.state.filterOn === true && this.state.searchOn === false) {
-      dataToDisplay = this.state.currentFilterData
+      dataToDisplay = this.state.currentFilterData;
     } else if (this.state.searchOn === true && this.state.filterOn === true) {
       dataToDisplay = this.state.currentFilterData.filter(restaurant => {
         if (this.state.currentSearchData.includes(restaurant)) {
-          return restaurant
+          return restaurant;
         }
-      })
+      });
     } else {
-      dataToDisplay = this.state.allRestaurantData
+      dataToDisplay = this.state.allRestaurantData;
     }
-    this.setState({dataToDisplay: dataToDisplay.sort((a,b) => a.name.localeCompare(b.name)) })
+    this.setState({
+      dataToDisplay: dataToDisplay.sort((a, b) => a.name.localeCompare(b.name))
+    });
   }
 
-  filterData(genreFilter, stateFilter) {
+  filterData(genreFilter, stateFilter, attireFilter) {
     let filteredData = this.state.allRestaurantData.filter(restaurant => {
       let currentIterableRestaurantGenres = restaurant.genre.split(",");
+      let restaurantAttire = restaurant.attire.charAt(0).toUpperCase() + restaurant.attire.slice(1);
       if (
+        // all filled
         currentIterableRestaurantGenres.includes(genreFilter) &&
         restaurant.state === stateFilter &&
+        restaurantAttire === attireFilter &&
         stateFilter !== "" &&
-        genreFilter !== ""
+        genreFilter !== "" &&
+        attireFilter !== ""
       ) {
         return restaurant;
       } else if (
+        // genre only
         currentIterableRestaurantGenres.includes(genreFilter) &&
         stateFilter === "" &&
-        genreFilter !== ""
+        genreFilter !== "" &&
+        attireFilter === ""
       ) {
         return restaurant;
       } else if (
+        // state only
         restaurant.state === stateFilter &&
         stateFilter !== "" &&
-        genreFilter === ""
+        genreFilter === "" &&
+        attireFilter === ""
       ) {
         return restaurant;
-      } else if (stateFilter === "" && genreFilter === "") {
+      } else if (
+        //attire only
+        restaurantAttire === attireFilter &&
+        stateFilter === "" &&
+        genreFilter === "" &&
+        attireFilter !== ""
+      ) {
+        return restaurant;
+      } else if (
+        //genre & state
+        restaurant.state === stateFilter &&
+        currentIterableRestaurantGenres.includes(genreFilter) &&
+        stateFilter !== "" &&
+        genreFilter !== "" &&
+        attireFilter === ""
+      ) {
+        return restaurant;
+      } else if(
+        //genre & attire
+        currentIterableRestaurantGenres.includes(genreFilter) &&
+        restaurantAttire === attireFilter &&
+        genreFilter !== "" &&
+        attireFilter !== ""
+      ) {
+        return restaurant
+      } else if (
+        //state & attire
+        restaurant.state === stateFilter &&
+        restaurantAttire === attireFilter &&
+        stateFilter !== "" &&
+        attireFilter !== ""
+      ) {
+        return restaurant
+      } else if (
+        // all empty/no filter
+        stateFilter === "" &&
+        genreFilter === "" &&
+        attireFilter === ""
+      ) {
         return restaurant;
       }
     });
 
-    this.setState({
-      currentFilterData: filteredData,
-      filterOn: true
-    }, () => {
-      this.adjustDisplayedData()
-    });
-    if (stateFilter === "" && genreFilter === "") {
+    this.setState(
+      {
+        currentFilterData: filteredData,
+        filterOn: true
+      },
+      () => {
+        this.adjustDisplayedData();
+      }
+    );
+    if (stateFilter === "" && genreFilter === "" && attireFilter === "") {
       this.setState({ filterOn: false }, () => {
-        this.adjustDisplayedData()
+        this.adjustDisplayedData();
       });
     }
   }
@@ -148,9 +213,12 @@ class App extends Component {
         newCurrentSearchData.push(resturant);
       }
     });
-    this.setState({ currentSearchData: newCurrentSearchData, searchOn: true }, () => {
-      this.adjustDisplayedData()
-    });
+    this.setState(
+      { currentSearchData: newCurrentSearchData, searchOn: true },
+      () => {
+        this.adjustDisplayedData();
+      }
+    );
   }
 
   render() {
@@ -167,10 +235,9 @@ class App extends Component {
           allRestaurantData={this.state.allRestaurantData}
           possibleRestaurantStates={this.state.possibleRestaurantStates}
           possibleRestaurantGenres={this.state.possibleRestaurantGenres}
+          possibleRestaurantAttire={this.state.possibleRestaurantAttire}
         />
-        <RestaurantTable
-          dataToDisplay={this.state.dataToDisplay}
-        />
+        <RestaurantTable dataToDisplay={this.state.dataToDisplay} />
       </main>
     );
   }

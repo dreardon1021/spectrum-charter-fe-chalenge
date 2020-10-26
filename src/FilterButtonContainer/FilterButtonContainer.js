@@ -3,17 +3,18 @@ import "./FilterButtonContainer.css";
 import "../App/App.css"
 
 class FilterButtonContainer extends Component {
-  constructor({ filterData, possibleRestaurantStates, possibleRestaurantGenres }) {
+  constructor({ filterData, possibleRestaurantStates, possibleRestaurantGenres, possibleRestaurantAttire }) {
     super({ filterData, possibleRestaurantStates, possibleRestaurantGenres });
     this.state = {
       currentGenreFilter: '',
-      currentStateFilter: ''
+      currentStateFilter: '',
+      currentAttireFilter: ''
     };
   }
 
   updateFiltersOnChange(e) {
     this.setState({[e.target.name]: e.target.value}, () => {
-      this.props.filterData(this.state.currentGenreFilter, this.state.currentStateFilter)
+      this.props.filterData(this.state.currentGenreFilter, this.state.currentStateFilter, this.state.currentAttireFilter)
     })
   }
 
@@ -39,6 +40,17 @@ class FilterButtonContainer extends Component {
             <option value="">No Filter</option>
             {this.props.possibleRestaurantStates.map(state => {
               return <option key={state} value={state}>{state}</option>;
+            })}
+          </select>
+        </div>
+        <div className="genre-state-select-container">
+          <label htmlFor="select-state" className="filter-headers">
+            Select Attire:
+          </label>
+          <select onChange={e => this.updateFiltersOnChange(e)} className="filter-select" name="currentAttireFilter">
+            <option value="">No Filter</option>
+            {this.props.possibleRestaurantAttire.map(attire => {
+              return <option key={attire} value={attire}>{attire}</option>;
             })}
           </select>
         </div>
