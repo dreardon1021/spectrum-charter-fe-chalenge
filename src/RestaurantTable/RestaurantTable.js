@@ -21,7 +21,17 @@ class RestaurantTable extends Component {
   render() {
     let { currentPage, restaurantsPerPage } = this.state;
 
-    currentPage = this.props.dataToDisplay.length < 10 ? 1 : currentPage
+    if (this.props.dataToDisplay.length < 10) {
+      currentPage = 1
+    } else if (this.props.dataToDisplay.length < 20 && currentPage > 2) {
+      currentPage = 1
+    } else if (this.props.dataToDisplay.length < 30 && currentPage > 3) {
+      currentPage = 1
+    } else {
+      currentPage = currentPage
+    }
+
+
     if(this.state.currentPage !== currentPage) {
       this.setState({currentPage: 1})
     }
