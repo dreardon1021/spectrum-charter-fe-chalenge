@@ -21,3 +21,8 @@ I would also like to make some items that are rendered with a map array prototyp
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+1. Clone down the repository
+2. cd into directory locally
+3. run npm install
+4. run npm start
