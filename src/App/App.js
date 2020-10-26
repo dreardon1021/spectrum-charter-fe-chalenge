@@ -183,6 +183,7 @@ class App extends Component {
         this.adjustDisplayedData();
       }
     );
+
     if (stateFilter === "" && genreFilter === "" && attireFilter === "") {
       this.setState({ filterOn: false }, () => {
         this.adjustDisplayedData();
@@ -219,6 +220,12 @@ class App extends Component {
         this.adjustDisplayedData();
       }
     );
+
+    if (newSearchQuery === "") {
+      this.setState({ searchOn: false }, () => {
+        this.adjustDisplayedData();
+      });
+    }
   }
 
   render() {
