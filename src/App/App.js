@@ -152,6 +152,7 @@ class App extends Component {
         //genre & attire
         currentIterableRestaurantGenres.includes(genreFilter) &&
         restaurantAttire === attireFilter &&
+        stateFilter === "" &&
         genreFilter !== "" &&
         attireFilter !== ""
       ) {
@@ -161,6 +162,7 @@ class App extends Component {
         restaurant.state === stateFilter &&
         restaurantAttire === attireFilter &&
         stateFilter !== "" &&
+        genreFilter === "" &&
         attireFilter !== ""
       ) {
         return restaurant
