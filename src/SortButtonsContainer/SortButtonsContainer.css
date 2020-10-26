@@ -1,0 +1,22 @@
+.sort-buttons-container {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.active {
+  background-color: rgb(23, 155, 199);
+  color: white;
+}
+
+.sort-button {
+  width: 40%;
+  font-size: 1em;
+  background-color: white;
+  border-radius: 0.5em;
+}
+
+.sort-button:hover {
+  background-color: rgb(82, 179, 211);
+}

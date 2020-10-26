@@ -12,6 +12,8 @@ class App extends Component {
     this.updateCurrentSearchData = this.updateCurrentSearchData.bind(this);
     this.filterData = this.filterData.bind(this);
     this.formResetTable = this.formResetTable.bind(this);
+    this.sortDisplayDataByState = this.sortDisplayDataByState.bind(this);
+    this.sortDisplayDataByName = this.sortDisplayDataByName.bind(this);
     this.state = {
       allRestaurantData: [],
       currentSearchData: [],
@@ -21,7 +23,9 @@ class App extends Component {
       possibleRestaurantGenres: [],
       possibleRestaurantAttire: [],
       filterOn: false,
-      searchOn: false
+      searchOn: false,
+      sortByState: false,
+      sortByName: true
     };
   }
 
@@ -81,6 +85,26 @@ class App extends Component {
       );
   }
 
+  sortDisplayDataByState() {
+    this.setState({
+      dataToDisplay: this.state.dataToDisplay.sort((a, b) =>
+        a.state.localeCompare(b.state)
+      ),
+      sortByState: true,
+      sortByName: false
+    });
+  }
+
+  sortDisplayDataByName() {
+    this.setState({
+      dataToDisplay: this.state.dataToDisplay.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      ),
+      sortByState: false,
+      sortByName: true
+    });
+  }
+
   adjustDisplayedData() {
     let dataToDisplay;
     if (this.state.filterOn === false && this.state.searchOn === true) {
@@ -96,15 +120,30 @@ class App extends Component {
     } else {
       dataToDisplay = this.state.allRestaurantData;
     }
-    this.setState({
-      dataToDisplay: dataToDisplay.sort((a, b) => a.name.localeCompare(b.name))
-    });
+
+    if (this.state.sortByName === true && this.state.sortByState === false) {
+      this.setState({
+        dataToDisplay: dataToDisplay.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        )
+      });
+    } else if (
+      this.state.sortByName === false &&
+      this.state.sortByState === true
+    ) {
+      this.setState({
+        dataToDisplay: dataToDisplay.sort((a, b) =>
+          a.state.localeCompare(b.state)
+        )
+      });
+    }
   }
 
   filterData(genreFilter, stateFilter, attireFilter) {
     let filteredData = this.state.allRestaurantData.filter(restaurant => {
       let currentIterableRestaurantGenres = restaurant.genre.split(",");
-      let restaurantAttire = restaurant.attire.charAt(0).toUpperCase() + restaurant.attire.slice(1);
+      let restaurantAttire =
+        restaurant.attire.charAt(0).toUpperCase() + restaurant.attire.slice(1);
       if (
         // all filled
         currentIterableRestaurantGenres.includes(genreFilter) &&
@@ -148,7 +187,7 @@ class App extends Component {
         attireFilter === ""
       ) {
         return restaurant;
-      } else if(
+      } else if (
         //genre & attire
         currentIterableRestaurantGenres.includes(genreFilter) &&
         restaurantAttire === attireFilter &&
@@ -156,7 +195,7 @@ class App extends Component {
         genreFilter !== "" &&
         attireFilter !== ""
       ) {
-        return restaurant
+        return restaurant;
       } else if (
         //state & attire
         restaurant.state === stateFilter &&
@@ -165,7 +204,7 @@ class App extends Component {
         genreFilter === "" &&
         attireFilter !== ""
       ) {
-        return restaurant
+        return restaurant;
       } else if (
         // all empty/no filter
         stateFilter === "" &&
@@ -241,6 +280,8 @@ class App extends Component {
           updateCurrentSearchData={this.updateCurrentSearchData}
           formResetTable={this.formResetTable}
           filterData={this.filterData}
+          sortDisplayDataByState={this.sortDisplayDataByState}
+          sortDisplayDataByName={this.sortDisplayDataByName}
           allRestaurantData={this.state.allRestaurantData}
           possibleRestaurantStates={this.state.possibleRestaurantStates}
           possibleRestaurantGenres={this.state.possibleRestaurantGenres}
