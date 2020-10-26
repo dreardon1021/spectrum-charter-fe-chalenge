@@ -4,8 +4,9 @@ import "../App/App.css"
 
 import SearchForm from "../SearchForm/SearchForm";
 import FilterButtonContainer from "../FilterButtonContainer/FilterButtonContainer";
+import SortButtonsContainer from "../SortButtonsContainer/SortButtonsContainer"
 
-const SearchContainer = ({ filterData, formResetTable, allRestaurantData, updateCurrentSearchData, possibleRestaurantGenres, possibleRestaurantStates, possibleRestaurantAttire }) => {
+const SearchContainer = ({ filterData, formResetTable, sortDisplayDataByState, sortDisplayDataByName, allRestaurantData, updateCurrentSearchData, possibleRestaurantGenres, possibleRestaurantStates, possibleRestaurantAttire }) => {
   return (
     <section className="search-container">
       <SearchForm allRestaurantData={allRestaurantData} formResetTable={formResetTable} updateCurrentSearchData={updateCurrentSearchData} />
@@ -15,6 +16,10 @@ const SearchContainer = ({ filterData, formResetTable, allRestaurantData, update
         possibleRestaurantStates={possibleRestaurantStates}
         possibleRestaurantGenres={possibleRestaurantGenres}
         possibleRestaurantAttire={possibleRestaurantAttire}
+      />
+      <SortButtonsContainer
+        sortDisplayDataByState={sortDisplayDataByState}
+        sortDisplayDataByName={sortDisplayDataByName}
       />
     </section>
   );
