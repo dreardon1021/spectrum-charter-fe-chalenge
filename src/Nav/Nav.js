@@ -7,7 +7,7 @@ import '../App/App.css'
 
 const Nav = ({ logoResetTable, allRestaurantData }) => {
   return(
-    <nav>
+    <nav data-testid="nav">
       <h1 onClick={() => logoResetTable(allRestaurantData)} className="logo cursor-pointer">Restauraunt Locator</h1>
     </nav>
   )
