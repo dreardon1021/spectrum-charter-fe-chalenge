@@ -16,6 +16,8 @@ The main challenges for me was getting the search and filter queries as specifie
 
 In the future I would like to complete the testing for each component and include some integration tests as well. I also would then apply CI/CD. I will add sorting buttons for name and states. Also allow a click on a restaurant table row to pop out some more information in an info bubble. If given more time all of this is achieveable. The only stretch goal that I have not yet attempted in my programming career has been TypeScript. I would like to achive this in the near future
 
+I would also like to make some items that are rendered with a map array prototype components themselves. A table row is an example of this.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
