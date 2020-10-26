@@ -1,4 +1,4 @@
-![Landing(https://user-images.githubusercontent.com/56371796/97125323-306c3e00-16f9-11eb-8403-2d155d338780.png)]
+![Landing](https://user-images.githubusercontent.com/56371796/97125323-306c3e00-16f9-11eb-8403-2d155d338780.png)
 
 # Deployed Link
 
