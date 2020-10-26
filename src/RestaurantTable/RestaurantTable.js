@@ -83,7 +83,7 @@ class RestaurantTable extends Component {
       <section className="table-container">
         <h2 className="table-header">Available Restaurants</h2>
         <table className="restaurant-table">
-          <tbody classname="restaurant-table-body">{renderRestaurants}</tbody>
+          <tbody className="restaurant-table-body">{renderRestaurants}</tbody>
         </table>
         <ul className="page-numbers-container">{renderPageNumbers}</ul>
       </section>
